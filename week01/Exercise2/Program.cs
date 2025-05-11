@@ -4,14 +4,14 @@ class Program
 {
     static void Main()
     {
-        // Solicitar al usuario el porcentaje de calificación
-        Console.Write("Ingrese su porcentaje de calificación: ");
+        // Ask the user for their grade percentage
+        Console.Write("Enter your grade percentage: ");
         int percentage = int.Parse(Console.ReadLine());
 
-        // Variable para almacenar la letra de calificación
+        // Variable to store the letter grade
         string letter = "";
 
-        // Determinar la letra de calificación basada en el porcentaje
+        // Determine the letter grade based on the percentage
         if (percentage >= 90)
         {
             letter = "A";
@@ -33,24 +33,26 @@ class Program
             letter = "F";
         }
 
-        // Determinar si el estudiante aprobó o no
+        // Check if the student passed or failed
         if (percentage >= 70)
         {
-            Console.WriteLine("¡Felicidades, aprobaste el curso!");
+            Console.WriteLine("Congratulations! You passed the course!");
         }
         else
         {
-            Console.WriteLine("No aprobaste el curso. ¡Ánimo para la próxima vez!");
+            Console.WriteLine("You did not pass the course. Better luck next time!");
         }
 
-        // Variable para almacenar el signo de la calificación
+        // Variable to store the grade sign (+ or -)
         string sign = "";
 
-        // Solo agregar signo para A, B, C y D
+        // Only add a "+" or "-" to grades that are not "F"
         if (letter != "F")
         {
+            // Get the last digit of the grade percentage
             int lastDigit = percentage % 10;
 
+            // Add the sign based on the last digit
             if (lastDigit >= 7)
             {
                 sign = "+";
@@ -59,20 +61,19 @@ class Program
             {
                 sign = "-";
             }
-            // Si no es ni + ni -, no hacemos nada
         }
 
-        // Si la calificación no es A+ ni F+, mostramos la letra con el signo
+        // Special case handling: No "A+" or "F+" grade
         if (letter == "A" && sign == "+")
         {
-            letter = "A-"; // No se debe permitir A+
+            sign = "-";  // "A+" is not allowed, so we make it "A-"
         }
         else if (letter == "F" && sign != "")
         {
-            sign = ""; // No se permite F+ ni F-
+            sign = "";  // No "F+" or "F-" grade, so we clear the sign
         }
 
-        // Imprimir la calificación final con el signo si corresponde
-        Console.WriteLine("Tu calificación final es: " + letter + sign);
+        // Print the final grade with or without a sign
+        Console.WriteLine($"Your final grade is: {letter}{sign}");
     }
 }
